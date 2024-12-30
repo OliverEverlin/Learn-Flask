@@ -4,7 +4,12 @@ app =  Flask(__name__)
 
 
 items = ["ITEM A", "ITEM B", "ITEM C", "ITEM X", "ITEM Y", "ITEM Z"]
-# primer end point con primera ruta
+
+
+@app.errorhandler(404)
+def not_found_endpoint(error):
+    return render_template('404.html', error=error)
+
 @app.route("/index") # decorador
 def index():
     user_ip_information = request.remote_addr
