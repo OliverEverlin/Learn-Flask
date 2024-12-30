@@ -1,13 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>
-        Hola que tal, tu direccion ip es {{user_ip_html}}
-    </h2>
-</body>
-</html>
+{% extends "base.html" %}
+{% import 'macros.html' as macros %}
+
+{% block title %}
+    {{ super() }}
+    Welcome to my Flask project
+{% endblock title %}
+
+{% block content %}
+    {% if user_ip %}
+        <h2>
+            Hola que tal, tu direccion ip es {{user_ip}}
+        </h2>
+    {% else %}
+        <a href="{{ url_for('index') }}">
+            Ir a index, lo que eventualmente hara 
+            que solicite la IP y por lo tanto 
+            crear una cookie
+        </a>
+    {% endif %}
+
+    <ul>
+        {% for item in items %}
+            {{macros.render_items(item)}}
+        {% endfor %}
+    </ul>
+{% endblock content %}
+

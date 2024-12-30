@@ -2,6 +2,8 @@ from flask import Flask, request,  make_response, redirect, render_template
 
 app =  Flask(__name__)
 
+
+items = ["ITEM A", "ITEM B", "ITEM C", "ITEM X", "ITEM Y", "ITEM Z"]
 # primer end point con primera ruta
 @app.route("/index") # decorador
 def index():
@@ -13,6 +15,10 @@ def index():
 @app.route("/show_information_address")
 def show_information():
     user_ip = request.cookies.get("user_ip")
-    return render_template("ip_information.html", user_ip_html=user_ip)
+    context = {
+        "user_ip": user_ip,
+        "items": items
+    }
+    return render_template("ip_information.html", **context)
 
 app.run(host='0.0.0.0', port = 3000, debug = True)
