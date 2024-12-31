@@ -1,7 +1,7 @@
 from flask import Flask, request,  make_response, redirect, render_template
-
+from flask_bootstrap import Bootstrap
 app =  Flask(__name__)
-
+bootstrap = Bootstrap(app)
 
 items = ["ITEM A", "ITEM B", "ITEM C", "ITEM X", "ITEM Y", "ITEM Z"]
 
