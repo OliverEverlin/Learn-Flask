@@ -21,6 +21,13 @@
         {% include "navbar.html" %}    
     {% endblock navbars %}
 
+    {% for message in  get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" data-dismiss="alert" class="close">&times</button>
+            {{message}}
+        </div>
+    {% endfor %}
+    
     <!-- Imagen -->
     <img src="{{ url_for('static', filename='images/06.webp') }}" alt="10">
 
@@ -28,6 +35,10 @@
     {% block content %}
     {% endblock content %}
     
+    {% block scripts %}
+        {{super()}}
+    {% endblock scripts %}
+
     <!-- Bootstrap JS desde CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-tdXtwk6k4ZXBjsnu2C+zRWbPzv8VRu4LGYrM8nMkQAkBuT3O5sS3MFlGqVn2wIcf" crossorigin="anonymous"></script>
 {% endblock %}
