@@ -51,12 +51,13 @@ Genera URLs dinámicas para recursos como rutas o archivos estáticos.
 Indica que esta plantilla hereda de otra
 * Mensajes flash: 
 Muestra los mensajes enviados desde el servidor con flash (en Python).
-`{% for message in get_flashed_messages() %}
+```html
+{% for message in get_flashed_messages() %}
     <div class="alert alert-success">
         {{ message }}
     </div>
 {% endfor %}
-`
+
 * Macros :
 Define una función reutilizable dentro de las plantillas.
 

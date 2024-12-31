@@ -3,11 +3,15 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
+import unittest
 
 # Configuracion de la app
 app =  Flask(__name__)
 bootstrap = Bootstrap(app)
+
 app.config["SECRET_KEY"]= "CLAVE SEGURA"
+# app.config["SERVER_NAME"] = "localhost:3000"
+# app.config["PREFERRED_URL_SCHEME"] = "http"
 
 # Datos simulados
 items = ["ITEM A", "ITEM B", "ITEM C", "ITEM X", "ITEM Y", "ITEM Z"]
@@ -15,7 +19,14 @@ items = ["ITEM A", "ITEM B", "ITEM C", "ITEM X", "ITEM Y", "ITEM Z"]
 class LoginForm(FlaskForm):
     username = StringField("Nombre del usuario", validators=[DataRequired()])
     password = PasswordField("Constraseña", validators=[DataRequired()])
-    submit = SubmitField("Enviar datos", validators=[DataRequired()])
+    submit = SubmitField("Enviar datos") #Dispara eventos, no requiere tener valor
+
+@app.cli.command()
+def test():
+    loader = unittest.TestLoader()
+    tests = loader.discover(start_dir="tests")
+    runner = unittest.TextTestRunner()
+    runner.run(tests)
 
 # Manejador de errores
 @app.errorhandler(404)
@@ -50,4 +61,5 @@ def show_information():
     return render_template("ip_information.html", **context)
 
 # Ejecucion del server
-app.run(host='0.0.0.0', port = 3000, debug = True)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port = 3000, debug = True)
