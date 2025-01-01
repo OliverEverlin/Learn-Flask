@@ -1,25 +1,13 @@
-from flask import Flask, request, make_response, redirect, render_template, session, url_for, flash
-from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from wtforms.fields import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+from flask import request, make_response, redirect, render_template, session, url_for, flash
 import unittest
+from app import create_app
+from app.forms import LoginForm
 
 # Configuracion de la app
-app =  Flask(__name__)
-bootstrap = Bootstrap(app)
-
-app.config["SECRET_KEY"]= "CLAVE SEGURA"
-# app.config["SERVER_NAME"] = "localhost:3000"
-# app.config["PREFERRED_URL_SCHEME"] = "http"
+app =  create_app()
 
 # Datos simulados
 items = ["ITEM A", "ITEM B", "ITEM C", "ITEM X", "ITEM Y", "ITEM Z"]
-
-class LoginForm(FlaskForm):
-    username = StringField("Nombre del usuario", validators=[DataRequired()])
-    password = PasswordField("Constraseña", validators=[DataRequired()])
-    submit = SubmitField("Enviar datos") #Dispara eventos, no requiere tener valor
 
 @app.cli.command()
 def test():
